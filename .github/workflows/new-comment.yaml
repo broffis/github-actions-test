@@ -8,10 +8,11 @@ jobs:
     if: github.event.issue.pull_request
     runs-on: ubuntu-latest
     outputs:
-      labeled: ${{ steps.pull-request-comment.labeled }}
+      labeled: ${{ steps.comment-labeler.labeled }}
     steps:
       # Adds specified label when comment contains listed keywords
       - name: Comment Labeler
+        id: comment-labeler
         uses: Amwam/issue-comment-action@v1.3.1
         with:
           keywords: '["[QA Approved]"]'
