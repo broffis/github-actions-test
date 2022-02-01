@@ -24,7 +24,7 @@ jobs:
         env:
           OUTPUT: ${{ toJSON(steps.comment-labeler) }}
       - name: Is QA Approved?
-        run: IS_LABELED === "true" && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
+        run: IS_LABELED === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
           IS_LABELED: ${{ steps.comment-labeler.outputs.labeled }}
