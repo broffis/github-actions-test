@@ -23,8 +23,8 @@ jobs:
     needs: pull-request-comment
     steps:
       - run: |
-          echo "Is this PR Labeled? $IS_LABELED"
-          echo "needs ${{ needs.pull-request-comment.output.labeled }}"
+          echo "Is this PR Labeled? ${IS_LABELED}"
+          echo "needs ${IS_LABELED}"
           IS_LABELED === "true" && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
