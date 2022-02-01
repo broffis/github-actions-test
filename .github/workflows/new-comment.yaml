@@ -7,8 +7,8 @@ jobs:
     name: On Pull Request Comment
     if: github.event.issue.pull_request
     runs-on: ubuntu-latest
-    # outputs:
-    #   labeled: ${{ steps.pull-request-comment.labeled }}
+    outputs:
+      labeled: ${{ steps.pull-request-comment.labeled }}
     steps:
       # Adds specified label when comment contains listed keywords
       - name: Comment Labeler
