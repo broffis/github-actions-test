@@ -31,5 +31,5 @@ jobs:
         env:
           ERROR_MESSAGE: "QA Approved label not found"
           IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          GITHUB_CONTEXT: ${{ toJSON(github.issue.labels) }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
