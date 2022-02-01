@@ -26,9 +26,9 @@ jobs:
       - run: |
           echo "Is this PR Labeled? ${IS_LABELED}"
           echo "needs ${IS_LABELED}"
-#          ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
           echo "array of names ${GITHUB_CONTEXT.*.name}"
           echo "contains? ${ contains(GITHUB_CONTEXT.*.name, "qa-approved" )}"
+          ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
           ERROR_MESSAGE: "QA Approved label not found"
