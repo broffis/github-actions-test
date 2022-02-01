@@ -7,8 +7,8 @@ jobs:
     name: On Pull Request Comment
     if: github.event.issue.pull_request
     runs-on: ubuntu-latest
-    outputs:
-      labeled: ${{ steps.pull-request-comment.labeled }}
+    # outputs:
+    #   labeled: ${{ steps.pull-request-comment.labeled }}
     steps:
       # Adds specified label when comment contains listed keywords
       - name: Comment Labeler
@@ -29,5 +29,6 @@ jobs:
         shell: bash
         env:
           ERROR_MESSAGE: "QA Approved label not found"
-          IS_LABELED: ${{ needs.pull-request-comment.output.labeled }}
+          IS_LABELED: ${{needs.pull-request-comment.output.labeled}}
+          PREV_STEP_OUTPUT: ${{needs}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
