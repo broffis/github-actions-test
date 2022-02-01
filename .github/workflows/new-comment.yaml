@@ -26,12 +26,14 @@ jobs:
       - run: |
           echo "Is this PR Labeled? ${IS_LABELED}"
           echo "needs ${IS_LABELED}"
-          echo "array of names ${GITHUB_CONTEXT.*.name}"
-          echo "contains? ${ contains(GITHUB_CONTEXT.*.name, "qa-approved" )}"
+          echo "non json'd array of names ${github.event.issue.labels.*.name}"
+          echo "array of names ${GITHUB_CONTEXT}"
+          echo "contains? ${ contains(GITHUB_CONTEXT, "qa-approved" )}"
           ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
           ERROR_MESSAGE: "QA Approved label not found"
           IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels) }}
+          # GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels) }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels.*.name) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
