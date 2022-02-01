@@ -17,3 +17,15 @@ jobs:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+  check-label:
+    name: Is QA Approved
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Is this PR Labeled? $IS_LABELED"
+          IS_LABELED === "true" && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
+        shell: bash
+        env:
+          ERROR_MESSAGE: "QA Approved label not found"
+          IS_LABELED: ${{ steps.pull-request-comment.output.labeled }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
