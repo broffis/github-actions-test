@@ -26,7 +26,7 @@ jobs:
       - run: |
           ERROR_MESSAGE="QA Approved label not found"
           echo "Was this PR just labeled by this workflow? ${IS_LABELED}"
-          echo "Already labeled qa-approved? ${ HAS_QA_LABEL ) }"
+          echo "Already labeled qa-approved? ${HAS_QA_LABEL}"
           ${IS_LABELED} || ${HAS_QA_LABEL} && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
