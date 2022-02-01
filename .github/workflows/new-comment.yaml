@@ -24,10 +24,10 @@ jobs:
     steps:
       - run: |
           echo "Is this PR Labeled? $IS_LABELED"
-          echo "steps ${{ steps.pull-request-comment.output.labeled }}"
+          echo "needs ${{ needs.pull-request-comment.output.labeled }}"
           IS_LABELED === "true" && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
           ERROR_MESSAGE: "QA Approved label not found"
-          IS_LABELED: ${{ steps.pull-request-comment.output.labeled }}
+          IS_LABELED: ${{ needs.pull-request-comment.output.labeled }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
