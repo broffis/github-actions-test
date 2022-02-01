@@ -27,7 +27,7 @@ jobs:
           echo "Is this PR Labeled? ${IS_LABELED}"
           echo "needs ${IS_LABELED}"
           echo "contains?"
-          echo "${{ contains(GITHUB_CONTEXT, "qa-approved" ) }}"
+          echo "${{ contains(env.GITHUB_CONTEXT, "qa-approved" ) }}"
           ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
