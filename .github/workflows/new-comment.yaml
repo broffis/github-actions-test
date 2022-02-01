@@ -18,18 +18,6 @@ jobs:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      # - name: Comment Labeler Output
-      #   run: echo "view your env"
-      #   shell: bash
-      #   env:
-      #     OUTPUT: ${{ toJSON(steps.comment-labeler) }}
-      # - name: Is QA Approved?
-      #   run: |
-      #     echo "Is this PR Labeled? ${IS_LABELED}"
-      #     ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
-      #   shell: bash
-      #   env:
-      #     IS_LABELED: ${{ steps.comment-labeler.outputs.labeled }}
   check-label:
     name: Is QA Approved
     runs-on: ubuntu-latest
@@ -43,5 +31,5 @@ jobs:
         env:
           ERROR_MESSAGE: "QA Approved label not found"
           IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          PREV_STEP_OUTPUT: ${{ toJSON(needs) }}
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
