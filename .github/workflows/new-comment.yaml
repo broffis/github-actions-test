@@ -34,5 +34,5 @@ jobs:
           IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
           # GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels) }}
           GITHUB_CONTEXT: ${{ toJSON(github.event.issue.labels.*.name) }}
-          GITHUB_CONTEXT_v2: ${{ (github.event.issue.labels.*.name) }}
+          GITHUB_CONTEXT_v2: ${{ github.event.issue.labels.*.name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
