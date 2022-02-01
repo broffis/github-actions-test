@@ -22,13 +22,14 @@ jobs:
     name: Is QA Approved
     runs-on: ubuntu-latest
     needs: pull-request-comment
+    skip:
     steps:
       - run: |
           echo "Is this PR Labeled? ${IS_LABELED}"
           echo "needs ${IS_LABELED}"
           echo "contains?"
           echo "${{ contains(env.GITHUB_CONTEXT, 'qa-approved' ) }}"
-          ${IS_LABELED} === true && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
+          ${IS_LABELED} || ${{ contains(env.GITHUB_CONTEXT, 'qa-approved' ) }} && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
           ERROR_MESSAGE: "QA Approved label not found"
