@@ -18,6 +18,11 @@ jobs:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Comment Labeler Output
+        run: echo ${{ OUTPUT.labeled }}
+        shell: bash
+        env:
+          OUTPUT: ${{ toJSON(steps.comment-labeler) }}
   check-label:
     name: Is QA Approved
     runs-on: ubuntu-latest
