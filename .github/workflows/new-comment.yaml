@@ -37,7 +37,7 @@ jobs:
                   -X POST \
                   -H "Accept: application/vnd.github.v3+json" \
                   -H "Authorization: token ${BEARER_TOKEN}"
-                  $statusUrl \
+                  ${statusUrl} \
                   -d '{"state":"success"}'
           fi
         shell: bash
@@ -47,6 +47,6 @@ jobs:
           HAS_QA_LABEL: ${{ contains(toJSON(github.event.issue.labels.*.name), 'qa-approved') }}
           GITHUB_SHA: ${{ toJSON(github.sha) }}
           GITHUB_REPO: ${{ toJSON(github.repository) }}
-          GITHUB: ${{ toJSON(github) }}
+          # GITHUB: ${{ toJSON(github) }}
           GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
           BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
