@@ -26,7 +26,10 @@ jobs:
       - run: |
           echo "sha: ${GITHUB_SHA}"
           echo "repo ${GITHUB_REPO}"
+          shaString="{sha}"
           echo "statuses_url: ${GITHUB_STATUSES_URL}${GITHUB_SHA}"
+          statusUrl=$(echo ${GITHUB_STATUSES_URL} | sed "s/$shaString/${GITHUB_SHA}/")
+          echo "new statusUrl: $statusUrl"
           echo "url: https://api.github.com/repos/${GITHUB_REPO}/statuses/${GITHUB_SHA}"
           if [ "${HAS_QA_LABEL}" ]
           then
@@ -43,5 +46,5 @@ jobs:
           HAS_QA_LABEL: ${{ contains(toJSON(github.event.issue.labels.*.name), 'qa-approved') }}
           GITHUB_SHA: ${{ toJSON(github.sha) }}
           GITHUB_REPO: ${{ toJSON(github.repository) }}
-          GITHUB: ${{ toJSON(github) }}
           GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
+          # GITHUB: ${{ toJSON(github) }}
