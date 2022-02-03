@@ -24,6 +24,7 @@ jobs:
     needs: pull-request-comment
     steps:
       - run: |
+          echo https://api.github.com/repos/${GITHUB_REPO}/statuses/${GITHUB_SHA}
           if [ ${HAS_QA_LABEL} ]
           then
             curl \
@@ -35,7 +36,7 @@ jobs:
         shell: bash
         env:
           IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          GITHUB_LABELS: ${{ toJSON(github) }}
+          # GITHUB_LABELS: ${{ toJSON(github) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HAS_QA_LABEL: ${{ contains(toJSON(github.event.issue.labels.*.name), 'qa-approved') }}
           GITHUB_SHA: ${{ toJSON(github.sha) }}
