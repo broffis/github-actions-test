@@ -27,6 +27,6 @@ jobs:
         shell: bash
         env:
           #         IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          GITHUB_LABELS: ${{ toJSON(github.event) }}
+          GITHUB_LABELS: ${{ toJSON(github) }}
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   #         HAS_QA_LABEL: ${{ contains(toJSON(github.event.issue.labels.*.name), 'qa-approved') }}
