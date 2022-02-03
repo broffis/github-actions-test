@@ -21,3 +21,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             console.log({ context })
+            console.log({
+              workflow: context.payload.workflow,
+              workflow_run: context.payload.workflow_run
+            })
