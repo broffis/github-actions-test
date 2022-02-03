@@ -15,3 +15,9 @@ jobs:
       - run: echo "This is success trigger"
         env:
           GITHUB_EVENT: ${{ toJSON(github.event) }}
+      - name: Github scripts
+        uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log({ context })
