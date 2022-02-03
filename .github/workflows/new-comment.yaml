@@ -36,7 +36,7 @@ jobs:
                   curl \
                   -X POST \
                   -H "Accept: application/vnd.github.v3+json" \
-                  -H "Authorization: token ${BEARER_TOKEN}"
+                  -H "Authorization: token ${BEARER_TOKEN}" \
                     "${statusUrl}" \
                   -d '{"state":"success"}'
           fi
