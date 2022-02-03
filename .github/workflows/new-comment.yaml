@@ -26,6 +26,7 @@ jobs:
       - run: |
           echo "sha: ${GITHUB_SHA}"
           echo "repo ${GITHUB_REPO}"
+          echo "statuses_url: ${GITHUB_STATUSES_URL}"
           echo "url: https://api.github.com/repos/${GITHUB_REPO}/statuses/${GITHUB_SHA}"
           if [ "${HAS_QA_LABEL}" ]
           then
@@ -43,3 +44,4 @@ jobs:
           GITHUB_SHA: ${{ toJSON(github.sha) }}
           GITHUB_REPO: ${{ toJSON(github.repository) }}
           GITHUB: ${{ toJSON(github) }}
+          GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
