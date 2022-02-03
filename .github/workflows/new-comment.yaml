@@ -49,3 +49,5 @@ jobs:
           GITHUB_REPO: ${{ toJSON(github.repository) }}
           GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
           BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+          GITHUB_DATA: ${{ toJSON(github) }}
+          GITHUB_CONTEXT: ${{ toJSON(context) }}
