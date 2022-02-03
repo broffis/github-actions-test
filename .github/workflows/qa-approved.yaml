@@ -1,0 +1,17 @@
+name: "QA Approved"
+
+on:
+  workflow_run:
+    workflows: [QA Approved Label]
+    types: [completed]
+
+jobs:
+  check-label:
+    name: QA Approval
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - run: echo "This is success trigger"
+        env:
+          GITHUB_EVENT: ${{ toJSON(github.event) }}
