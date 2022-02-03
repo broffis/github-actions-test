@@ -8,6 +8,8 @@ jobs:
   check-label:
     name: QA Approval
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - run: |
           ERROR_MESSAGE="QA Approved label not found"
