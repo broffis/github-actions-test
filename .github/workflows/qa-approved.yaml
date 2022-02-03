@@ -16,3 +16,4 @@ jobs:
         env:
           # GITHUB_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
           GITHUB_LABELS: ${{ toJSON(github.event) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
