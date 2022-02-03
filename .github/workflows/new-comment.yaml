@@ -33,7 +33,7 @@ jobs:
                   curl \
                   -X POST \
                   -H "Accept: application/vnd.github.v3+json" \
-                  -H "Authorization: token ${secrets.BEARER_TOKEN}"
+                  -H "Authorization: token ${BEARER_TOKEN}"
                   "${GITHUB_STATUSES_URL}${GITHUB_SHA}" \
                   -d '{"state":"success"}'
           fi
@@ -46,3 +46,4 @@ jobs:
           GITHUB_REPO: ${{ toJSON(github.repository) }}
           GITHUB: ${{ toJSON(github) }}
           GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
