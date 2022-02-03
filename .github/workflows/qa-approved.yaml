@@ -15,5 +15,5 @@ jobs:
         shell: bash
         env:
           # GITHUB_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
-          GITHUB_LABELS: ${{ toJSON(github.event.pull_request) }}
+          GITHUB_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
