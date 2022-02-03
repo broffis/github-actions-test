@@ -11,9 +11,9 @@ jobs:
     steps:
       - run: |
           ERROR_MESSAGE="QA Approved label not found"
-          echo "check env"
+          ${HAS_QA_LABEL} && (echo "You have the QA approved label" && exit 0) || (echo "::error::${ERROR_MESSAGE}" && exit 1)
         shell: bash
         env:
-          # GITHUB_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
-          GITHUB_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
+          GITHUB_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+          HAS_QA_LABEL: ${{ contains(toJSON(github.event.pull_request.labels.*.name), 'qa-approved') }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
