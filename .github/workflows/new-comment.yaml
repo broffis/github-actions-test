@@ -24,7 +24,8 @@ jobs:
     needs: pull-request-comment
     steps:
       - run: |
-          echo "https://api.github.com/repos/${env.GITHUB_REPO}/statuses/${env.GITHUB_SHA}"
+          echo ${GITHUB_SHA}
+          echo ${GITHUB_REPO}
           if [ ${HAS_QA_LABEL} ]
           then
             curl \
