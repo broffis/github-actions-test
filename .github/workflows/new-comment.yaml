@@ -24,15 +24,15 @@ jobs:
     needs: pull-request-comment
     steps:
       - run: |
-          echo ${GITHUB_SHA}
-          echo ${GITHUB_REPO}
-          if [ ${HAS_QA_LABEL} ]
+          echo "${GITHUB_SHA}"
+          echo "${GITHUB_REPO}"
+          if [ "${HAS_QA_LABEL}" ]
           then
-            curl \
-            -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${env.GITHUB_REPO}/statuses/${env.GITHUB_SHA} \
-            -d '{"state":"success"}'
+                  curl \
+                  -X POST \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  https://api.github.com/repos/"${GITHUB_REPO}"/statuses/"${GITHUB_SHA}" \
+                  -d '{"state":"success"}'
           fi
         shell: bash
         env:
