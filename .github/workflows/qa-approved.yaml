@@ -1,8 +1,10 @@
 name: "QA Approved"
 
 on:
-  pull_request:
-    types: [labeled, unlabeled]
+  # pull_request:
+  #   types: [labeled, unlabeled]
+  pull_request_review_comment:
+    types: [created, deleted]
 
 jobs:
   check-label:
@@ -19,3 +21,4 @@ jobs:
           GITHUB_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
           HAS_QA_LABEL: ${{ contains(toJSON(github.event.pull_request.labels.*.name), 'qa-approved') }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event )}}
