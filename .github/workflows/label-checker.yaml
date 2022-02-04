@@ -29,16 +29,16 @@ jobs:
               repo: name,
               sha,
               state,
-              description: 'QA Approval',
-              context: 'Has your code been approved by QA?'
+              context: 'QA Approval',
+              description: 'Has your code been approved by QA?'
             });
             const result = await github.rest.repos.createCommitStatus({
               owner: login,
               repo: name,
               sha: sha,
               state: state,
-              description: 'QA Approval',
-              context: 'Has your code been approved by QA?'
+              context: 'QA Approval',
+              description: 'Has your code been approved by QA?'
             });
 
             console.log({ result });
