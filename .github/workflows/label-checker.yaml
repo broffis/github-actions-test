@@ -14,10 +14,9 @@ jobs:
         with:
           github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
           script: |
-#            console.log({ context })
-#            console.log({
-#              repository: context.payload.repository
-#            })
+            console.log({
+              pull_request: context.payload.pull_request
+            })
             const { sha } = context.payload.pull_request.head
             const { html_url, owner: { login } } = context.payload.repository
             console.log({ sha, html_url, login })
