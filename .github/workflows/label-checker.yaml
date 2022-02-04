@@ -16,5 +16,9 @@ jobs:
           script: |
             console.log({ context })
             console.log({
-              pull_request: context.payload.pull_request
+              repository: context.payload.repository
             })
+            const { sha } = context.payload.pull_request.head
+            console.log({ sha })
+
+#            github.repos.createCommitStatus({})
