@@ -19,7 +19,7 @@ jobs:
               console.log({ label: context.payload.label })
             }
             const { sha } = context.payload.pull_request.head
-            const { html_url, owner: { login } } = context.payload.repository
+            const { full_name, owner: { login } } = context.payload.repository
             console.log({
               owner: login,
               repo: html_url,
