@@ -16,5 +16,5 @@ jobs:
           script: |
             console.log({ context })
             console.log({
-              pull_request: payload.pull_request
+              pull_request: context.payload.pull_request
             })
