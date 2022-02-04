@@ -2,7 +2,7 @@ name: "Label Checker v3"
 
 on:
   pull_request:
-    types: [created, labeled, unlabeled, synchronized]
+    # types: [opened, labeled, unlabeled, synchronized]
 
 jobs:
   check-that-label:
