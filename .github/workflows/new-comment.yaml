@@ -1,4 +1,4 @@
-name: "QA Approved Label"
+name: "Handle new comments"
 on:
   issue_comment:
     types: [created]
@@ -7,47 +7,11 @@ jobs:
     name: On Pull Request Comment
     if: github.event.issue.pull_request
     runs-on: ubuntu-latest
-    outputs:
-      labeled: ${{ steps.comment-labeler.outputs.labeled }}
     steps:
       # Adds specified label when comment contains listed keywords
       - name: Comment Labeler
-        id: comment-labeler
         uses: Amwam/issue-comment-action@v1.3.1
         with:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-  check-label:
-    name: QA Approval
-    runs-on: ubuntu-latest
-    needs: pull-request-comment
-    steps:
-      - run: |
-          echo "sha: ${GITHUB_SHA}"
-          echo "repo ${GITHUB_REPO}"
-          shaString="{sha}"
-          echo "statuses_url: ${GITHUB_STATUSES_URL}${GITHUB_SHA}"
-          statusUrl=$(echo ${GITHUB_STATUSES_URL} | sed "s/$shaString/${GITHUB_SHA}/")
-          echo "statuses_url: ${GITHUB_STATUSES_URL}${GITHUB_SHA}"
-          echo "new statusUrl: $statusUrl"
-          if [ "${HAS_QA_LABEL}" ]
-          then
-                  curl \
-                  -X POST \
-                  -H "Accept: application/vnd.github.v3+json" \
-                  -H "Authorization: token ${BEARER_TOKEN}" \
-                      https://api.github.com/repos/broffis/github-actions-test/statuses/${GITHUB_SHA} \
-                  -d '{"state":"success"}'
-          fi
-        shell: bash
-        env:
-          IS_LABELED: ${{needs.pull-request-comment.outputs.labeled}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HAS_QA_LABEL: ${{ contains(toJSON(github.event.issue.labels.*.name), 'qa-approved') }}
-          GITHUB_SHA: ${{ toJSON(github.sha) }}
-          GITHUB_REPO: ${{ toJSON(github.repository) }}
-          GITHUB_STATUSES_URL: ${{ toJSON(github.event.repository.statuses_url) }}
-          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-          GITHUB_DATA: ${{ toJSON(github) }}
-          # GITHUB_CONTEXT: ${{ toJSON(context) }}
+          github-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
