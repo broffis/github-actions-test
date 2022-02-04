@@ -27,5 +27,5 @@ jobs:
               owner: login,
               repo: html_url,
               sha: sha,
-              state: success
+              state: 'success'
             })
