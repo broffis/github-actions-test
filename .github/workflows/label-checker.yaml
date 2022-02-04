@@ -26,9 +26,10 @@ jobs:
               sha,
               state: 'success'
             })
-            github.rest.repos.createCommitStatus({
-              owner: login,
-              repo: html_url,
-              sha: sha,
-              state: 'success'
-            })
+
+#            github.rest.repos.createCommitStatus({
+#              owner: login,
+#              repo: html_url,
+#              sha: sha,
+#              state: 'success'
+#            })
