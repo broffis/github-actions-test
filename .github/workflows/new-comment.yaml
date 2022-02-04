@@ -5,6 +5,8 @@ on:
 jobs:
   pull-request-comment:
     name: On Pull Request Comment
+    env:
+      package-access-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
     if: github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
@@ -14,4 +16,4 @@ jobs:
         with:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
-          github-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
