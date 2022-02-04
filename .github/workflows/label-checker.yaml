@@ -22,7 +22,12 @@ jobs:
             }
             const { sha } = context.payload.pull_request.head
             const { html_url, owner: { login } } = context.payload.repository
-            console.log({ sha, html_url, login })
+            console.log({
+              owner: login,
+              repo: html_url,
+              sha,
+              state: 'success'
+            })
             console.log({ github })
 
 #            github.repos.createCommitStatus({
