@@ -14,6 +14,7 @@ jobs:
         with:
           github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
           script: |
+            console.log(context.payload.repository)
             if (context.payload.action === 'labeled') {
               console.log({ label: context.payload.label })
             }
