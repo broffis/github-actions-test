@@ -14,4 +14,4 @@ jobs:
         with:
           keywords: '["[QA Approved]"]'
           labels: '["qa-approved"]'
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
