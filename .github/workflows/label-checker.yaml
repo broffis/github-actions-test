@@ -29,6 +29,8 @@ jobs:
               repo: name,
               sha,
               state,
+              description: 'QA Approval',
+              context: 'Has your code been approved by QA?'
             });
             const result = await github.rest.repos.createCommitStatus({
               owner: login,
