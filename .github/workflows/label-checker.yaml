@@ -7,7 +7,7 @@ on:
 jobs:
   check-that-label:
     name: La cuenta por favor
-    runs on: ubuntu-latest:
+    runs-on: ubuntu-latest
     steps:
       - name: Script Label Checker
         uses: actions/github-script@0.8.0
