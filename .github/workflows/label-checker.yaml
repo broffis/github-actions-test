@@ -14,12 +14,16 @@ jobs:
         with:
           github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
           script: |
-            console.log({ context })
-            console.log({
-              repository: context.payload.repository
-            })
+#            console.log({ context })
+#            console.log({
+#              repository: context.payload.repository
+#            })
             const { sha } = context.payload.pull_request.head
             const { html_url, owner: { login } } = context.payload.repository
             console.log({ sha, html_url, login })
-
-#            github.repos.createCommitStatus({})
+            github.repos.createCommitStatus({
+              owner: login,
+              repo: html_url,
+              sha: sha,
+              state: success
+            })
