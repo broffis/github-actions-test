@@ -1,0 +1,44 @@
+name: "Label Checker v3"
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+  check-that-label:
+    name: La cuenta por favor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Script Label Checker
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
+          script: |
+            const approvedLabel = "qa-approved";
+            const prLabels = context.payload.pull_request.labels.map((label) => label.name);
+            const state = prLabels.includes(approvedLabel) ? "success" : "pending";
+
+            const { sha } = context.payload.pull_request.head;
+            const {
+              name,
+              owner: { login },
+            } = context.payload.repository;
+
+            console.log({
+              owner: login,
+              repo: name,
+              sha,
+              state,
+              context: 'QA Approval',
+              description: 'Has your code been approved by QA?'
+            });
+            const result = await github.rest.repos.createCommitStatus({
+              owner: login,
+              repo: name,
+              sha: sha,
+              state: state,
+              context: 'QA Approval',
+              description: 'Has your code been approved by QA?'
+            });
+
+            console.log({ result });
