@@ -19,6 +19,7 @@ jobs:
               repository: context.payload.repository
             })
             const { sha } = context.payload.pull_request.head
-            console.log({ sha })
+            const { html_url, owner: { login } } = context.payload.repository
+            console.log({ sha, html_url, login })
 
 #            github.repos.createCommitStatus({})
