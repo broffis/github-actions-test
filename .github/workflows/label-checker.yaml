@@ -5,7 +5,7 @@ on:
     types: [created, labeled, unlabeled, synchronized]
 
 jobs:
-  check-that-label
+  check-that-label:
     name: La cuenta por favor
     runs on: ubuntu-latest:
     steps:
