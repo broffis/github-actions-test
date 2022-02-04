@@ -17,6 +17,9 @@ jobs:
             console.log({
               pull_request: context.payload.pull_request
             })
+            if (context.payload.action === 'labeled') {
+              console.log({ label: context.payload.label })
+            }
             const { sha } = context.payload.pull_request.head
             const { html_url, owner: { login } } = context.payload.repository
             console.log({ sha, html_url, login })
