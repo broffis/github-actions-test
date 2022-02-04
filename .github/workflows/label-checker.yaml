@@ -14,22 +14,23 @@ jobs:
         with:
           github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
           script: |
-            console.log(context.payload.repository)
+            console.log({ context })
             if (context.payload.action === 'labeled') {
               console.log({ label: context.payload.label })
             }
             const { sha } = context.payload.pull_request.head
             const { name, owner: { login } } = context.payload.repository
-            console.log({
-              owner: login,
-              repo: name,
-              sha,
-              state: 'success'
-            })
-            const result = await github.rest.repos.createCommitStatus({
-              owner: login,
-              repo: name,
-              sha: sha,
-              state: 'success'
-            })
-            console.log({ result })
+
+#            console.log({
+#              owner: login,
+#              repo: name,
+#              sha,
+#              state: 'pending'
+#            })
+#            const result = await github.rest.repos.createCommitStatus({
+#              owner: login,
+#              repo: name,
+#              sha: sha,
+#              state: 'pending'
+#            })
+#            console.log({ result })
