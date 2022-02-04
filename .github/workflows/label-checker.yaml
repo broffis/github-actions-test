@@ -19,18 +19,17 @@ jobs:
               console.log({ label: context.payload.label })
             }
             const { sha } = context.payload.pull_request.head
-            const { full_name, name, owner: { login } } = context.payload.repository
+            const { name, owner: { login } } = context.payload.repository
             console.log({
               owner: login,
-              repo: full_name,
-              name,
+              repo: name,
               sha,
               state: 'success'
             })
 
             github.rest.repos.createCommitStatus({
               owner: login,
-              repo: full_name,
+              repo: name,
               sha: sha,
               state: 'success'
             })
