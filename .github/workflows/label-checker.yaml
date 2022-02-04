@@ -35,6 +35,8 @@ jobs:
               repo: name,
               sha: sha,
               state: state,
+              description: 'QA Approval',
+              context: 'Has your code been approved by QA?'
             });
 
             console.log({ result });
