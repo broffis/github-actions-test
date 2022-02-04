@@ -25,7 +25,7 @@ jobs:
               sha,
               state: 'success'
             })
-            console.log({ github })
+            console.log({ github.rest.repos })
 
 #            github.repos.createCommitStatus({
 #              owner: login,
