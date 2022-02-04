@@ -26,10 +26,10 @@ jobs:
               sha,
               state: 'success'
             })
-
-            github.rest.repos.createCommitStatus({
+            const result = await github.rest.repos.createCommitStatus({
               owner: login,
               repo: name,
               sha: sha,
               state: 'success'
             })
+            console.log({ result })
