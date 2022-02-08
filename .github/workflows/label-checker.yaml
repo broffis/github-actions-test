@@ -5,6 +5,14 @@ on:
     types: [opened, labeled, unlabeled, synchronize]
 
 jobs:
+  log-context:
+    name: Log github context
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
   check-that-label:
     name: La cuenta por favor
     runs-on: ubuntu-latest
@@ -12,7 +20,6 @@ jobs:
       - name: Script Label Checker
         uses: actions/github-script@v5
         with:
-          github-token: ${{secrets.PACKAGES_ACCESS_TOKEN}}
           script: |
             const approvedLabel = "qa-approved";
             const prLabels = context.payload.pull_request.labels.map((label) => label.name);
