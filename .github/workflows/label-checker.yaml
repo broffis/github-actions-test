@@ -13,9 +13,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            console.log(GITHUB_CONTEXT)
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
+            console.log(context)
   check-that-label:
     name: La cuenta por favor
     runs-on: ubuntu-latest
