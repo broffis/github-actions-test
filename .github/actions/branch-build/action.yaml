@@ -13,6 +13,17 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Cancel all other runs of this workflow
+      # This could be replaced with 'concurrency' at the workflow level once it's out of beta
+      # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idconcurrency
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+        all_but_latest: true
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Changed files
       id: changed-files
       # all-files: all files since origin/main (... makes sure files not merged from
