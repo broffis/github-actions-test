@@ -1,0 +1,28 @@
+name: Branch build
+description: Branch build that sets up caches and outputs to be consumed.
+  Use for first build in workflow
+
+inputs:
+  packages-access-token:
+    description: PACKAGES_ACCESS_TOKEN from parent workflow
+    required: true
+outputs:
+  all-files:
+    description: Files changed in PR
+    value: ${{ steps.changed-files.outputs.all-files }}
+runs:
+  using: composite
+  steps:
+    - name: Changed files
+      id: changed-files
+      # all-files: all files since origin/main (... makes sure files not merged from
+      # main yet are not included -- only files changed in the branch)
+      # typescript-files: same as all-files but filtered for typescript and does
+      # not included any deleted files
+      run: |
+        echo Changed files information
+        all_files=$(git diff --name-only origin/main... | tr '\n' ' ')
+        echo ::set-output name=all-files::$all_files
+        echo --- all-files ---
+        echo $all_files
+      shell: bash
