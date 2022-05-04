@@ -10,15 +10,26 @@ concurrency:
   group: main
 
 jobs:
+  branch-build:
+    name: Main Branch Build
+    runs-on: ubuntu-latest
+    outputs:
+      all-files: ${{ steps.build.outputs.all-files }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/branch-build
+        id: build
+        with:
+          packages-access-token: ${{ secrets.PACKAGES_ACCESS_TOKEN }}
   changed-files:
     name: Changed Files
+    needs: [branch-build]
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "$GITHUB_CONTEXT"
           echo Changed files information
-          all_files=$(git diff --name-only origin/main... | tr '\n' ' ')
-          echo ::set-output name=all-files::$all_files
+          echo ${{ needs.branch-build.outputs.all-files }}
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
