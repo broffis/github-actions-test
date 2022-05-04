@@ -1,0 +1,26 @@
+name: Notify Slack
+
+on:
+  push: # Runs on merge (push) to $branch
+    branches:
+      - notify-slack
+concurrency:
+  # Only allow one workflow in the 'main' group to run at a time. Others will queue up
+  # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency
+  group: main
+
+jobs:
+  changed-files:
+    name: Changed Files
+    id: changed-files
+    run: |
+      echo Changed files information
+      all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
+      echo ::set-output name=all-files::$all_files
+      echo --- all-files ---
+      echo $all_files
+      typescript_files=$(git diff --name-only origin/notify-slack... --diff-filter=ACM *.ts *.tsx | tr '\n' ' ')
+      echo ::set-output name=typescript-files::$typescript_files
+      echo --- typescript-files ---
+      echo $typescript_files
+    shell: bash
