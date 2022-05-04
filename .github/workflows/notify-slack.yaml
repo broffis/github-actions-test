@@ -13,6 +13,7 @@ jobs:
   changed-files:
     name: Changed Files
     id: changed-files
+    runs-on: ubuntu-latest
     run: |
       echo Changed files information
       all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
