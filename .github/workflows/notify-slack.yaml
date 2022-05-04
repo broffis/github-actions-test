@@ -24,4 +24,4 @@ jobs:
                 echo ::set-output name=typescript-files::$typescript_files
                 echo --- typescript-files ---
                 echo $typescript_files
-          shell: bash
+            shell: bash
