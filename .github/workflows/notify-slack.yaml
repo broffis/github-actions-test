@@ -14,7 +14,7 @@ jobs:
     name: Changed Files
     runs-on: ubuntu-latest
     steps:
-      run: |
+      - run: |
         echo Changed files information
         all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
         echo ::set-output name=all-files::$all_files
