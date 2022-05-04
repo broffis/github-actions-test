@@ -12,16 +12,16 @@ concurrency:
 jobs:
   changed-files:
     name: Changed Files
-    id: changed-files
     runs-on: ubuntu-latest
-    run: |
-      echo Changed files information
-      all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
-      echo ::set-output name=all-files::$all_files
-      echo --- all-files ---
-      echo $all_files
-      typescript_files=$(git diff --name-only origin/notify-slack... --diff-filter=ACM *.ts *.tsx | tr '\n' ' ')
-      echo ::set-output name=typescript-files::$typescript_files
-      echo --- typescript-files ---
-      echo $typescript_files
-    shell: bash
+    steps:
+      - run: |
+        echo Changed files information
+        all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
+        echo ::set-output name=all-files::$all_files
+        echo --- all-files ---
+        echo $all_files
+        typescript_files=$(git diff --name-only origin/notify-slack... --diff-filter=ACM *.ts *.tsx | tr '\n' ' ')
+        echo ::set-output name=typescript-files::$typescript_files
+        echo --- typescript-files ---
+        echo $typescript_files
+      shell: bash
