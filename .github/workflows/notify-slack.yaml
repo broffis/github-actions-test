@@ -16,6 +16,9 @@ jobs:
     steps:
       - run: |
           echo "$GITHUB_CONTEXT"
+          echo Changed files information
+          all_files=$(git diff --name-only origin/main... | tr '\n' ' ')
+          echo ::set-output name=all-files::$all_files
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
