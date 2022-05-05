@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "$GITHUB_CONTEXT"
           echo Changed files information
           echo ${{ needs.branch-build.outputs.all-files }}
         shell: bash
