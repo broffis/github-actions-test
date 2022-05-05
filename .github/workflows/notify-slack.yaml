@@ -1,73 +1,73 @@
-name: Notify Slack
+# name: Notify Slack
 
-on:
-  push: # Runs on merge (push) to $branch
-    branches:
-      - notify-slack
-concurrency:
-  # Only allow one workflow in the 'main' group to run at a time. Others will queue up
-  # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency
-  group: main
+# on:
+#   push: # Runs on merge (push) to $branch
+#     branches:
+#       - notify-slack
+# concurrency:
+#   # Only allow one workflow in the 'main' group to run at a time. Others will queue up
+#   # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency
+#   group: main
 
-jobs:
-  branch-build:
-    name: Main Branch Build
-    runs-on: ubuntu-latest
-    outputs:
-      all-files: ${{ steps.build.outputs.all-files }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/branch-build
-        id: build
-        with:
-          packages-access-token: ${{ secrets.PACKAGES_ACCESS_TOKEN }}
-  log-github-context:
-    name: Log github context
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo Before ${{ github.event.before }}
-          echo After ${{ github.event.after }}
-        shell: bash
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
+# jobs:
+#   branch-build:
+#     name: Main Branch Build
+#     runs-on: ubuntu-latest
+#     outputs:
+#       all-files: ${{ steps.build.outputs.all-files }}
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: ./.github/actions/branch-build
+#         id: build
+#         with:
+#           packages-access-token: ${{ secrets.PACKAGES_ACCESS_TOKEN }}
+#   log-github-context:
+#     name: Log github context
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: |
+#           echo Before ${{ github.event.before }}
+#           echo After ${{ github.event.after }}
+#         shell: bash
+#         env:
+#           GITHUB_CONTEXT: ${{ toJSON(github) }}
 
-  changed-files:
-    name: Changed Files
-    needs: [branch-build]
-    runs-on: ubuntu-latest
-    outputs:
-      all: ${{ steps.changes.outputs.all}}
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Changed
-        id: changes
-        run: |
-          echo Changed files information
-          echo Before: $BEFORE_SHA
-          echo After: $AFTER_SHA
-          all_files=$(git diff --name-only --diff-filter=ACMRT $BEFORE_SHA...$AFTER_SHA | xargs)
-          echo $all_files
-        shell: bash
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-          BEFORE_SHA: ${{ github.event.before }}
-          AFTER_SHA: ${{ github.event.after }}
-  check-package-lock:
-    name: Check package-lock changes
-    needs: [branch-build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Contains changes
-        if: ${{ contains(env.ALL-FILES, 'package-lock.json') && always() }}
-        run: echo PACKAGE_LOCK_CHANGES
-        shell: bash
-        env:
-          ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
-      - name: Nothing
-        if: ${{ !contains(env.ALL-FILES, 'package-lock.json') && always() }}
-        run: echo No changes found
-        shell: bash
-        env:
-          ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
+#   changed-files:
+#     name: Changed Files
+#     needs: [branch-build]
+#     runs-on: ubuntu-latest
+#     outputs:
+#       all: ${{ steps.changes.outputs.all}}
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v2
+#       - name: Changed
+#         id: changes
+#         run: |
+#           echo Changed files information
+#           echo Before: $BEFORE_SHA
+#           echo After: $AFTER_SHA
+#           all_files=$(git diff --name-only --diff-filter=ACMRT $BEFORE_SHA...$AFTER_SHA | xargs)
+#           echo $all_files
+#         shell: bash
+#         env:
+#           GITHUB_CONTEXT: ${{ toJSON(github) }}
+#           BEFORE_SHA: ${{ github.event.before }}
+#           AFTER_SHA: ${{ github.event.after }}
+#   check-package-lock:
+#     name: Check package-lock changes
+#     needs: [branch-build]
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Contains changes
+#         if: ${{ contains(env.ALL-FILES, 'package-lock.json') && always() }}
+#         run: echo PACKAGE_LOCK_CHANGES
+#         shell: bash
+#         env:
+#           ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
+#       - name: Nothing
+#         if: ${{ !contains(env.ALL-FILES, 'package-lock.json') && always() }}
+#         run: echo No changes found
+#         shell: bash
+#         env:
+#           ALL-FILES: ${{ needs.branch-build.outputs.all-files}}

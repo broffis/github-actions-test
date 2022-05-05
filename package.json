@@ -1,0 +1,46 @@
+{
+  "name": "github-actions-test",
+  "version": "1.0.0",
+  "description": "This is a repo used for testing github actions",
+  "main": "blank.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broffis/github-actions-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/broffis/github-actions-test/issues"
+  },
+  "homepage": "https://github.com/broffis/github-actions-test#readme",
+  "dependencies": {
+    "@actions/core": "^1.7.0",
+    "@actions/github": "^5.0.1",
+    "minimatch": "^5.0.1"
+  },
+  "devDependencies": {
+    "@octokit/graphql-schema": "^10.73.0",
+    "@octokit/types": "^6.25.0",
+    "@octokit/webhooks": "^9.10.0",
+    "@octokit/webhooks-definitions": "^3.67.3",
+    "@octokit/webhooks-types": "^5.2.0",
+    "@semantic-release/git": "^9.0.0",
+    "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.19",
+    "@vercel/ncc": "^0.33.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-github": "^4.2.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^26.6.3",
+    "nock": "^13.0.5",
+    "prettier": "^2.3.2",
+    "semantic-release": "^17.4.4",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.1.3"
+  }
+}
