@@ -39,6 +39,7 @@ runs:
         echo ::set-output name=all-files::$all_files
         echo --- all-files ---
         echo $all_files
-        echo ::set-output name=package-lock-change::${{ contains($all_files, 'package-lock.json' ) }}
+        package_lock=$(contains($all_files, 'package-lock.json'))
+        echo ::set-output name=package-lock-change::$package_lock
         echo --- package-lock ---
       shell: bash
