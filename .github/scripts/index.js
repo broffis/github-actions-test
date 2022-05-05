@@ -20,5 +20,5 @@ module.exports = async ({ github, context }) => {
     head: latestCommit,
   });
 
-  console.log({ ...compareCommits });
+  console.log({ ...compareCommits.data });
 };
