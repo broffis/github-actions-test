@@ -1,5 +1,3 @@
-const { IncomingWebhook } = require("@slack/webhook");
-
 module.exports = async ({ github, context }) => {
   // console.log({ github });
   // console.log({ ...context.payload.repository });
@@ -7,8 +5,6 @@ module.exports = async ({ github, context }) => {
   console.log(process.env["webhook-url"]);
 
   const { name, owner } = context.payload.repository;
-
-  // console.log({ name, owner });
 
   const latestCommit = context.payload.after;
   const previousCommit = context.payload.before;
@@ -25,4 +21,13 @@ module.exports = async ({ github, context }) => {
   });
 
   const { files } = compareCommits.data;
+
+  files.forEach((file) => {
+    console.log(
+      "file: ",
+      file.filename,
+      " is package-lock ",
+      file.filename.includes("package-lock.json")
+    );
+  });
 };
