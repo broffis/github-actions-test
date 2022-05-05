@@ -27,6 +27,7 @@ jobs:
       - name: Script file checker
         uses: actions/github-script@v6
         with:
+          webhook-url: "thisIsAFakeUrl"
           script: |
             const script = require('.github/scripts/index.js');
             script({github, context});
