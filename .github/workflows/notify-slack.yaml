@@ -28,7 +28,8 @@ jobs:
     steps:
       - run: |
           echo Changed files information
-          echo ${{ needs.branch-build.outputs.all-files }}
+          echo All Files:  ${{ needs.branch-build.outputs.all-files }}
+          echo Package lock: ${{ needs.branch-build.outputs.package-lock-change }}
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
