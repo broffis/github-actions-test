@@ -10,9 +10,6 @@ outputs:
   all-files:
     description: Files changed in PR
     value: ${{ steps.changed-files.outputs.all-files }}
-  package-lock-change:
-    description: Is package-lock modified
-    value:
 runs:
   using: composite
   steps:
@@ -39,7 +36,4 @@ runs:
         echo ::set-output name=all-files::$all_files
         echo --- all-files ---
         echo $all_files
-        package_lock=$(contains($all_files, 'package-lock.json'))
-        echo ::set-output name=package-lock-change::$package_lock
-        echo --- package-lock ---
       shell: bash
