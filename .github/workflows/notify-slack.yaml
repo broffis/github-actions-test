@@ -45,10 +45,13 @@ jobs:
         id: changes
         run: |
           echo Changed files information
-          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.before }} ${{ github.event.after }} )"
+          echo Before: $BEFORE_SHA
+          echo After: $AFTER_SHA
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
+          BEFORE_SHA: ${{ fromJSON(github.event.before )}}
+          AFTER_SHA: ${{ fromJSON(github.event.before )}}
   check-package-lock:
     name: Check package-lock changes
     needs: [branch-build]
