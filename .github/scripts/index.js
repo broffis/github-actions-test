@@ -2,7 +2,7 @@ module.exports = async ({ github, context }) => {
   // console.log({ github });
   // console.log({ ...context.payload.repository });
 
-  console.log({ ...process.env });
+  console.log(process.env["webhook-url"]);
 
   const { name, owner } = context.payload.repository;
 
