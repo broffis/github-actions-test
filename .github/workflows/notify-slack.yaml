@@ -28,8 +28,8 @@ jobs:
       - run: |
           echo "$GITHUB_CONTEXT"
           echo Yar Pirate Ipsum
-          echo Before sha: $GITHUB_CONTEXT.event.before
-          echo After sha: $GITHUB_CONTEXT.event.after
+          echo Before sha: $GITHUB_CONTEXT.event.before.sha
+          echo After sha: $GITHUB_CONTEXT.event.after.sha
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
