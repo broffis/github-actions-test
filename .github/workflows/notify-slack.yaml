@@ -26,7 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ${{ toJSON(github.event) }}
+          echo Before ${{ github.event.before }}
+          echo After ${{ github.event.after }}
           echo Yar Pirate Ipsum
         shell: bash
         env:
