@@ -18,7 +18,7 @@ jobs:
       - name: Log Context
         uses: actions/github-script@v5
         with:
-        script: console.log(JSON.stringify(context, null, 2))
+          script: console.log(JSON.stringify(context, null, 2))
   package-lock-script:
     name: Package lock script
     runs-on: ubuntu-latest
