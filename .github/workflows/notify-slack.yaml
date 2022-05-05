@@ -50,8 +50,8 @@ jobs:
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
-          BEFORE_SHA: ${{ fromJSON(github.event.before) }}
-          AFTER_SHA: ${{ fromJSON(github.event.after) }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.event.after }}
   check-package-lock:
     name: Check package-lock changes
     needs: [branch-build]
