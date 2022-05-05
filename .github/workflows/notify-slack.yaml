@@ -47,6 +47,7 @@ jobs:
           echo Changed files information
           echo Before: $BEFORE_SHA
           echo After: $AFTER_SHA
+          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT "$BEFORE_SHA" "$AFTER_SHA" | xargs)"
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
