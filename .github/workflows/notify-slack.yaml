@@ -39,7 +39,6 @@ jobs:
     if: ${{ contains(env.ALL-FILES, 'package-lock.json') && always() }}
     runs-on: ubuntu-latest
     steps:
-        run: echo PACKAGE_LOCK_CHANGES
+      run: echo PACKAGE_LOCK_CHANGES
     env:
       ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
-      - name: no changes
