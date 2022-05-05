@@ -22,6 +22,8 @@ module.exports = async ({ github, context }) => {
 
   const { files } = compareCommits.data;
 
+  console.log("this is just a placeholder");
+
   files.forEach((file) => {
     console.log(
       "file: ",
