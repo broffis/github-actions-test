@@ -36,11 +36,16 @@ jobs:
     name: Changed Files
     needs: [branch-build]
     runs-on: ubuntu-latest
+    outputs:
+      all: ${{ steps.changes.outputs.all}}
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Changed
+        id: changes
       - run: |
           echo Changed files information
-          echo All Files:  ${{ needs.branch-build.outputs.all-files }}
-          echo Package lock: ${{ needs.branch-build.outputs.package-lock-change }}
+          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.before }} ${{ github.event.after }} )"
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
