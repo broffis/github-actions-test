@@ -1,6 +1,6 @@
 module.exports = async ({ github, context }) => {
   // console.log({ github });
-  console.log({ ...context.payload.repository });
+  // console.log({ ...context.payload.repository });
 
   const { name, owner } = context.payload.repository;
 
@@ -20,5 +20,5 @@ module.exports = async ({ github, context }) => {
     head: latestCommit,
   });
 
-  console.log({ ...compareCommits.files });
+  console.log({ ...compareCommits });
 };
