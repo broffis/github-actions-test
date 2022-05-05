@@ -44,7 +44,7 @@ jobs:
         shell: bash
         env:
           ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
-      - name: Nope
+      - name: Nothing
         if: ${{ !contains(env.ALL-FILES, 'package-lock.json') && always() }}
         run: echo No changes found
         shell: bash
