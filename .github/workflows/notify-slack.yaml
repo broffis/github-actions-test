@@ -47,7 +47,7 @@ jobs:
           echo Changed files information
           echo Before: $BEFORE_SHA
           echo After: $AFTER_SHA
-          all_files=$(git diff --name-only --diff-filter=ACMRT "$BEFORE_SHA" "$AFTER_SHA" | xargs)
+          all_files=$(git diff --name-only --diff-filter=ACMRT $BEFORE_SHA $AFTER_SHA | xargs)
           echo $all_files
         shell: bash
         env:
