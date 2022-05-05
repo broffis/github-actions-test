@@ -23,12 +23,12 @@ jobs:
           packages-access-token: ${{ secrets.PACKAGES_ACCESS_TOKEN }}
   log-github-context:
     name: Log github context
-      runs-on: ubuntu-latest
-      steps:
-        - run: echo "$GITHUB_CONTEXT"
-          shell: bash
-          env:
-            GITHUB_CONTEXT: ${{ toJSON(github) }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "$GITHUB_CONTEXT"
+        shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
 
   changed-files:
     name: Changed Files
