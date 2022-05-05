@@ -31,4 +31,4 @@ jobs:
             const script = require('.github/scripts/index.js');
             script({github, context });
         env:
-          webhook-url: "fakeWebhookUrl.net"
+          webhook-url: ${{ secrets.BRANDON_SLACK_WEBHOOK }}
