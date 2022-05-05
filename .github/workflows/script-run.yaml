@@ -29,6 +29,6 @@ jobs:
         with:
           script: |
             const script = require('.github/scripts/index.js');
-            script({github, context});
+            script({github, context, env });
         env:
           webhook-url: "fakeWebhookUrl.net"

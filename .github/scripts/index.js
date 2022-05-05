@@ -1,4 +1,4 @@
-module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context, env }) => {
   // console.log({ github });
   // console.log({ ...context.payload.repository });
 
