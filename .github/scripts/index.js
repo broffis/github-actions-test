@@ -1,6 +1,6 @@
 module.exports = async ({ github, context }) => {
-  // console.log({ github });
-  // console.log({ context });
+  console.log({ github });
+  console.log({ context });
 
   const {
     name,
@@ -14,7 +14,7 @@ module.exports = async ({ github, context }) => {
     `Comparing latest commit ${latestCommit} with previous commit ${previousCommit} on ${context.ref}`
   );
 
-  const compareCommits = await github.octokit.rest.repos.compareCommits({
+  const compareCommits = await github.rest.repos.compareCommits({
     owner,
     repo: name,
     base: previousCommit,
