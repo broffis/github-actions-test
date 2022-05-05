@@ -32,7 +32,7 @@ runs:
       # not included any deleted files
       run: |
         echo Changed files information
-        all_files=$(git diff --name-only origin/main... | tr '\n' ' ')
+        all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
         echo ::set-output name=all-files::$all_files
         echo --- all-files ---
         echo $all_files
