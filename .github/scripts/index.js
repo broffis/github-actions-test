@@ -4,6 +4,8 @@ module.exports = async ({ github, context }) => {
 
   const { name, owner } = context.payload.repository;
 
+  console.log({ name, owner });
+
   const latestCommit = context.payload.after;
   const previousCommit = context.payload.before;
 
