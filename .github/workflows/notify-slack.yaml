@@ -26,10 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "$GITHUB_CONTEXT"
+#          echo "$GITHUB_CONTEXT"
+          echo "$GITHUB_CONTEXT.event"
           echo Yar Pirate Ipsum
-          echo Before sha: ${{ env.GITHUB_CONTEXT }}
-          echo After sha: ${{ env.GITHUB_CONTEXT }}
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
