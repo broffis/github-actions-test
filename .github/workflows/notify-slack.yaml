@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-#          echo "$GITHUB_CONTEXT"
-          echo "$GITHUB_CONTEXT.event"
+          echo "$GITHUB_CONTEXT"
+          echo GITHUB_CONTEXT.event "$GITHUB_CONTEXT.event"
           echo Yar Pirate Ipsum
         shell: bash
         env:
