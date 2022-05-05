@@ -28,7 +28,6 @@ jobs:
       - run: |
           echo Before ${{ github.event.before }}
           echo After ${{ github.event.after }}
-          echo Yar Pirate Ipsum
         shell: bash
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
