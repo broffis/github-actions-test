@@ -2,6 +2,8 @@ module.exports = async ({ github, context }) => {
   // console.log({ github });
   // console.log({ ...context.payload.repository });
 
+  console.log({ env });
+
   const { name, owner } = context.payload.repository;
 
   // console.log({ name, owner });
