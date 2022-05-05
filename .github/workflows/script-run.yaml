@@ -27,7 +27,6 @@ jobs:
       - name: Script file checker
         uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const script = require('.github/scripts/index.js');
             script({github, context});

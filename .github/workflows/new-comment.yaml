@@ -1,17 +1,17 @@
-name: "Handle new comments"
-on:
-  issue_comment:
-    types: [created]
-jobs:
-  pull-request-comment:
-    name: On Pull Request Comment
-    if: github.event.issue.pull_request
-    runs-on: ubuntu-latest
-    steps:
-      # Adds specified label when comment contains listed keywords
-      - name: Comment Labeler
-        uses: Amwam/issue-comment-action@v1.3.1
-        with:
-          keywords: '["[QA Approved]"]'
-          labels: '["qa-approved"]'
-          github-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
+# name: "Handle new comments"
+# on:
+#   issue_comment:
+#     types: [created]
+# jobs:
+#   pull-request-comment:
+#     name: On Pull Request Comment
+#     if: github.event.issue.pull_request
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Adds specified label when comment contains listed keywords
+#       - name: Comment Labeler
+#         uses: Amwam/issue-comment-action@v1.3.1
+#         with:
+#           keywords: '["[QA Approved]"]'
+#           labels: '["qa-approved"]'
+#           github-token: "${{ secrets.PACKAGES_ACCESS_TOKEN }}"
