@@ -35,9 +35,9 @@ jobs:
             script({github, context, core });
   notify-slack:
     name: Send Slack notification
+    if: ${{ needs.check-package-lock-changes.outputs.should-notify-slack == true && always() }}
     runs-on: ubuntu-latest
     needs: check-package-lock-change
-    if: ${{ steps.check-package-lock-changes.outputs.should-notify-slack == true && always() }}
     steps:
       - name: Notify Slack
         run: echo Send that notification ${{ needs.check-package-lock-changes.outputs.should-notify-slack }}
