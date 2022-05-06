@@ -54,8 +54,16 @@ jobs:
                 {
                   type: "header",
                   text: {
-                    type: "mrkdwn",
+                    type: "plain_text",
                     text: "Package Lock Updates",
+                    emoji: true
+                  }
+                },
+                {
+                  type: "header",
+                  text: {
+                    type: "plain_text",
+                    text: "RBS: Run npm ci",
                     emoji: true
                   }
                 }
