@@ -46,8 +46,13 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.BRANDON_SLACK_WEBHOOK }}
         with:
-          status: ${{ job.status }}
-          author_name: Integration Test # default: 8398a7@action-slack
-          fields: repo,commit,message,author # default: repo,commit
-          mention: here
-          if_mention: failure,cancelled
+          status: custom
+          custom_payload: |
+            {
+              text: "Update Package Lock",
+              attachments: [{
+                color: 'good'
+                title: 'Package Lock Update',
+                text: 'Make sure you run npm ci'
+              }]
+            }
