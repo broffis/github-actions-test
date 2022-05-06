@@ -39,5 +39,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-package-lock-change
     steps:
-      - name: Notify Slack
+      - name: Log should notify
         run: echo Send that notification ${{ needs.check-package-lock-change.outputs.should-notify-slack }}
+      - name: Send notification
+        uses: 8398a7/action-slack@v3
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: `Bro-ski, you gotta run npm ci before you can develop again`
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+              }]
+            }
