@@ -62,8 +62,8 @@ jobs:
                 {
                   "type": "section",
                   "text": {
-                    "type": "plain_text",
-                    "text": "Make sure you run npm ci before continuing development",
+                    "type": "mrkdwn",
+                    "text": "Make sure you run `npm ci` before continuing development",
                     "emoji": true
                   }
                 },
