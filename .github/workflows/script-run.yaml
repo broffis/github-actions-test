@@ -54,23 +54,10 @@ jobs:
                 {
                   type: "header",
                   text: {
-                    type: "plain_text",
+                    type: "mrkdwn",
                     text: "Package Lock Updates",
                     emoji: true
                   }
-                },
-                {
-                  type: "context",
-                  elements: [
-                    {
-                      type: "mrkdwn",
-                      text: "## RBS: Make sure you run `npm ci`"
-                    },
-                    {
-                      type: "header",
-                      text: "RBS: Package Lock updated"
-                    }
-                  ]
-                },
+                }
               ]
             }
