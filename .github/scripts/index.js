@@ -1,9 +1,4 @@
-module.exports = async ({ github, context }) => {
-  // console.log({ github });
-  // console.log({ ...context.payload.repository });
-
-  console.log(process.env["webhook-url"]);
-
+const checkForChanges = async ({ github, context }) => {
   const { name, owner } = context.payload.repository;
 
   const latestCommit = context.payload.after;
@@ -24,12 +19,24 @@ module.exports = async ({ github, context }) => {
 
   console.log(files);
 
+  let hasPackageLockChanges = false;
+
   files.forEach((file) => {
-    console.log(
-      "file: ",
-      file.filename,
-      " is package-lock ",
-      file.filename.includes("package-lock.json")
-    );
+    if (file.filename.includes("package-lock.json"))
+      hasPackageLockChanges = true;
   });
+
+  return hasPackageLockChanges;
 };
+
+const run = async ({ github, context, core }) => {
+  console.log({ core });
+
+  const shouldNotifySlack = await checkForChanges({ github, context });
+
+  console.log("should notify slack: ", shouldNotifySlack);
+
+  core.setOutput("should-notify-slack", shouldNotifySlack);
+};
+
+module.exports = run;
