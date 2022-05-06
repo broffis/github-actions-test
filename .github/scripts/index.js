@@ -34,7 +34,11 @@ const run = async ({ github, context, core }) => {
 
   const shouldNotifySlack = await checkForChanges({ github, context });
 
-  console.log("should notify slack: ", shouldNotifySlack);
+  console.log(
+    "should notify slack: ",
+    shouldNotifySlack,
+    typeof shouldNotifySlack
+  );
 
   core.setOutput("should-notify-slack", shouldNotifySlack);
 };
