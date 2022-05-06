@@ -44,7 +44,7 @@ jobs:
       - name: Send notification
         uses: 8398a7/action-slack@v3
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.BRANDON_SLACK_WEBHOOK }}
         with:
           status: ${{ job.status }}
           author_name: Integration Test # default: 8398a7@action-slack
