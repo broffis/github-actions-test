@@ -49,23 +49,22 @@ jobs:
           status: custom
           custom_payload: |
             {
-              text: "Update Package Lock",
               blocks: [
                 {
-                  type: "header",
-                  text: {
-                    type: "plain_text",
-                    text: "RBS: Package Lock Updates :ghost:",
-                    emoji: true
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "This is a header block :ghost:",
+                    "emoji": true
                   }
                 },
                 {
-                  type: "context",
-                  elements: [
+                  "type": "context",
+                  "elements": [
                     {
-                      type: "mrkdwn",
-                      text: Make sure you run `npm ci`"
-                    },
+                      "type": "mrkdwn",
+                      "text": "*Cat* has approved this message."
+                    }
                   ]
                 },
               ]
