@@ -46,11 +46,8 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          status: custom
-          custom_payload: |
-            {
-              text: `Bro-ski, you gotta run npm ci before you can develop again`
-              attachments: [{
-                color: 'good',
-              }]
-            }
+          status: ${{ job.status }}
+          author_name: Integration Test # default: 8398a7@action-slack
+          fields: repo,commit,message,author # default: repo,commit
+          mention: here
+          if_mention: failure,cancelled
