@@ -23,9 +23,7 @@ jobs:
     name: Package lock script
     runs-on: ubuntu-latest
     outputs:
-      should-notify-slack:
-        description: Boolean for checking files for package-lock changes
-        value: ${{ steps.package-lock-check-script.outputs.should-notify-slack }}
+      should-notify-slack: ${{ steps.package-lock-check-script.outputs.should-notify-slack }}
     steps:
       - uses: actions/checkout@v2
       - name: Script file checker
