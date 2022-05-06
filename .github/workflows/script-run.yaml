@@ -51,6 +51,6 @@ jobs:
             {
               text: `Bro-ski, you gotta run npm ci before you can develop again`
               attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                color: 'good',
               }]
             }
