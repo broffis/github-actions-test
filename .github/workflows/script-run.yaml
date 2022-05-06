@@ -65,15 +65,12 @@ jobs:
                     {
                       type: "mrkdwn",
                       text: "## RBS: Make sure you run `npm ci`"
+                    },
+                    {
+                      type: "header",
+                      text: "RBS: Package Lock updated"
                     }
                   ]
-                },
-                {
-                  type: "header",
-                  text: {
-                    type: "mrkdwn",
-                    text: "## RBS: Make sure you run `npm ci`"
-                  }
                 },
               ]
             }
