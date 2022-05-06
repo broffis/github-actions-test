@@ -50,12 +50,22 @@ jobs:
           custom_payload: |
             {
               text: "Update Package Lock",
-              blocks: [{
-                type: "header",
-                text: {
-                  type: "plain_text",
-                  text: "This is a header block",
-                  emoji: true
-                }
-              }]
+              blocks: [
+                {
+                  type: "header",
+                  text: {
+                    type: "plain_text",
+                    text: "Package Lock Updates",
+                    emoji: true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Make sure you run npm ci before continuing development",
+                    "emoji": true
+                  }
+                },
+              ]
             }
