@@ -43,8 +43,8 @@ jobs:
         run: echo Send that notification ${{ needs.check-package-lock-change.outputs.should-notify-slack }}
       - name: Send notification
         uses: 8398a7/action-slack@v3
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
           status: custom
           custom_payload: |
