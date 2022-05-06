@@ -1,4 +1,4 @@
-const checkForChanges = async ({ github, context }) => {
+const checkForChanges = async ({ github, context, core }) => {
   const { name, owner } = context.payload.repository;
 
   const latestCommit = context.payload.after;
@@ -26,21 +26,19 @@ const checkForChanges = async ({ github, context }) => {
       hasPackageLockChanges = true;
   });
 
-  return hasPackageLockChanges;
-};
-
-const run = async ({ github, context, core }) => {
-  console.log({ core });
-
-  const shouldNotifySlack = await checkForChanges({ github, context });
-
-  console.log(
-    "should notify slack: ",
-    shouldNotifySlack,
-    typeof shouldNotifySlack
-  );
-
   core.setOutput("should-notify-slack", shouldNotifySlack);
 };
 
-module.exports = run;
+// const run = async ({ github, context, core }) => {
+//   console.log({ core });
+
+//   const shouldNotifySlack = await checkForChanges({ github, context });
+
+//   console.log(
+//     "should notify slack: ",
+//     shouldNotifySlack,
+//     typeof shouldNotifySlack
+//   );
+// };
+
+module.exports = checkForChanges;
