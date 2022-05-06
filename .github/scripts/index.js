@@ -26,7 +26,7 @@ const checkForChanges = async ({ github, context, core }) => {
       hasPackageLockChanges = true;
   });
 
-  core.setOutput("should-notify-slack", shouldNotifySlack);
+  core.setOutput("should-notify-slack", hasPackageLockChanges);
 };
 
 // const run = async ({ github, context, core }) => {
