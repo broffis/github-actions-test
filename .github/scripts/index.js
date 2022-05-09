@@ -29,16 +29,4 @@ const checkForChanges = async ({ github, context, core }) => {
   core.setOutput("should-notify-slack", hasPackageLockChanges);
 };
 
-// const run = async ({ github, context, core }) => {
-//   console.log({ core });
-
-//   const shouldNotifySlack = await checkForChanges({ github, context });
-
-//   console.log(
-//     "should notify slack: ",
-//     shouldNotifySlack,
-//     typeof shouldNotifySlack
-//   );
-// };
-
 module.exports = checkForChanges;
