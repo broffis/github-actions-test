@@ -22,8 +22,7 @@ const checkForChanges = async ({ github, context, core }) => {
   let hasPackageLockChanges = false;
 
   files.forEach((file) => {
-    if (file.filename.includes("package-lock.json"))
-      hasPackageLockChanges = true;
+    if (file.filename === "package-lock.json") hasPackageLockChanges = true;
   });
 
   core.setOutput("should-notify-slack", hasPackageLockChanges);
