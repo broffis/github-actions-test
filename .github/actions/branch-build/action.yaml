@@ -1,0 +1,39 @@
+name: Branch build
+description: Branch build that sets up caches and outputs to be consumed.
+  Use for first build in workflow
+
+inputs:
+  packages-access-token:
+    description: PACKAGES_ACCESS_TOKEN from parent workflow
+    required: true
+outputs:
+  all-files:
+    description: Files changed in PR
+    value: ${{ steps.changed-files.outputs.all-files }}
+runs:
+  using: composite
+  steps:
+    - name: Cancel all other runs of this workflow
+      # This could be replaced with 'concurrency' at the workflow level once it's out of beta
+      # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idconcurrency
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+        all_but_latest: true
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Changed files
+      id: changed-files
+      # all-files: all files since origin/main (... makes sure files not merged from
+      # main yet are not included -- only files changed in the branch)
+      # typescript-files: same as all-files but filtered for typescript and does
+      # not included any deleted files
+      run: |
+        echo Changed files information
+        all_files=$(git diff --name-only origin/notify-slack... | tr '\n' ' ')
+        echo ::set-output name=all-files::$all_files
+        echo --- all-files ---
+        echo $all_files
+      shell: bash
