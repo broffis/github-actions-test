@@ -1,73 +1,71 @@
-name: Notify Slack
+name: "Check Package-Lock"
 
 on:
   push: # Runs on merge (push) to $branch
     branches:
       - main
+
 concurrency:
   # Only allow one workflow in the 'main' group to run at a time. Others will queue up
   # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency
   group: main
 
 jobs:
-  branch-build:
-    name: Main Branch Build
-    runs-on: ubuntu-latest
-    outputs:
-      all-files: ${{ steps.build.outputs.all-files }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/branch-build
-        id: build
-        with:
-          packages-access-token: ${{ secrets.PACKAGES_ACCESS_TOKEN }}
-  log-github-context:
+  log-context:
     name: Log github context
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo Before ${{ github.event.before }}
-          echo After ${{ github.event.after }}
-        shell: bash
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-
-  changed-files:
-    name: Changed Files
-    needs: [branch-build]
+      - name: Log Context
+        uses: actions/github-script@v5
+        with:
+          script: console.log(JSON.stringify(context, null, 2))
+  check-package-lock-change:
+    name: Package lock script
     runs-on: ubuntu-latest
     outputs:
-      all: ${{ steps.changes.outputs.all}}
+      should-notify-slack: ${{ steps.package-lock-check-script.outputs.should-notify-slack }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Changed
-        id: changes
-        run: |
-          echo Changed files information
-          echo Before: $BEFORE_SHA
-          echo After: $AFTER_SHA
-          all_files=$(git diff --name-only --diff-filter=ACMRT $BEFORE_SHA...$AFTER_SHA | xargs)
-          echo $all_files
-        shell: bash
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-          BEFORE_SHA: ${{ github.event.before }}
-          AFTER_SHA: ${{ github.event.after }}
-  check-package-lock:
-    name: Check package-lock changes
-    needs: [branch-build]
+      - uses: actions/checkout@v2
+      - name: Script file checker
+        id: package-lock-check-script
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('.github/scripts/index.js');
+            script({github, context, core });
+  notify-slack:
+    name: Send Slack notification
+    if: ${{ needs.check-package-lock-change.outputs.should-notify-slack == 'true' && always() }}
     runs-on: ubuntu-latest
+    needs: check-package-lock-change
     steps:
-      - name: Contains changes
-        if: ${{ contains(env.ALL-FILES, 'package-lock.json') && always() }}
-        run: echo PACKAGE_LOCK_CHANGES
-        shell: bash
+      - name: Log should notify
+        run: echo Send that notification ${{ needs.check-package-lock-change.outputs.should-notify-slack }}
+      - name: Send notification
+        uses: 8398a7/action-slack@v3
         env:
-          ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
-      - name: Nothing
-        if: ${{ !contains(env.ALL-FILES, 'package-lock.json') && always() }}
-        run: echo No changes found
-        shell: bash
-        env:
-          ALL-FILES: ${{ needs.branch-build.outputs.all-files}}
+          SLACK_WEBHOOK_URL: ${{ secrets.BRANDON_SLACK_WEBHOOK }}
+        with:
+          status: custom
+          custom_payload: |
+            {
+              blocks: [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "This is a header block :ghost:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Cat* has approved this message."
+                    }
+                  ]
+                },
+              ]
+            }
