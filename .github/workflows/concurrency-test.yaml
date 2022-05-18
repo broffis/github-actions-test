@@ -1,0 +1,30 @@
+name: "Test concurrency"
+
+on:
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  log-context:
+    name: Log github context
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Context
+        uses: actions/github-script@v5
+        with:
+          script: console.log(JSON.stringify(context, null, 2))
+  check-concurrency:
+    name: Check GH concurrency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Timer
+        id: timer-script
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('.github/scripts/timer.js');
+            script({ context });
