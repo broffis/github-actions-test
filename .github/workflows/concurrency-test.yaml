@@ -3,16 +3,15 @@ name: "Test concurrency"
 on:
   push:
 
-
 jobs:
   log-context:
     name: Log github context
-      runs-on: ubuntu-latest
-      steps:
-        - name: Log Context
-          uses: actions/github-script@v5
-          with:
-            script: console.log(JSON.stringify(context, null, 2))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Context
+        uses: actions/github-script@v5
+        with:
+          script: console.log(JSON.stringify(context, null, 2))
   check-concurrency:
     name: Check GH concurrency
     runs-on: ubuntu-latest
