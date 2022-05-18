@@ -1,5 +1,4 @@
-const simpleTimer = ({ github, context }) => {
-  // console.log(github);
+const simpleTimer = ({ context }) => {
   const {
     payload: { ref },
     workflow,
@@ -8,7 +7,7 @@ const simpleTimer = ({ github, context }) => {
 
   setTimeout(() => {
     console.log("Timer has run completely");
-  }, 10000);
+  }, 60000);
 };
 
 module.exports = simpleTimer;
