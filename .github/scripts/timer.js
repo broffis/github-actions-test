@@ -1,7 +1,8 @@
 const simpleTimer = ({ github, context }) => {
   // console.log(github);
   const {
-    payload: { workflow, ref },
+    payload: { ref },
+    workflow,
   } = context;
   console.log(`${workflow}-${ref}`);
 
