@@ -3,6 +3,9 @@ name: "Test concurrency"
 on:
   push:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   log-context:
     name: Log github context
