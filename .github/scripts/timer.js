@@ -3,7 +3,7 @@ const simpleTimer = ({ github }) => {
 
   setTimeout(() => {
     console.log("Timer has run completely");
-  }, 500);
+  }, 5000);
 };
 
 module.exports = simpleTimer;
